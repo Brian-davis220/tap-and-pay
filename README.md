@@ -9,7 +9,7 @@ A complete RFID-based payment system with real-time card management, transaction
 - Frontend: http://157.173.101.159:9208
 - Backend API: http://157.173.101.159:8208
 
-## �🌟 Features
+## ��� Features
 
 - Real-time RFID card detection via MQTT
 - Cumulative balance top-ups with persistent storage
@@ -61,11 +61,7 @@ npm start
 - Frontend: http://localhost:9208
 - Backend: http://localhost:8208
 
-### VPS Deployment (Already Deployed! ✅)
-
-**Live URL**: http://157.173.101.159:9208
-
-The application is currently running on the VPS. To update or redeploy:
+### VPS Deployment
 
 1. **Upload to VPS:**
 ```bash
