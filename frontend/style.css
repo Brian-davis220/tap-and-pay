@@ -578,6 +578,20 @@ button:disabled {
     cursor: not-allowed;
 }
 
+.view-all-btn {
+    width: auto;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    background: rgba(99, 102, 241, 0.2);
+    border: 1px solid var(--primary);
+    color: var(--primary);
+}
+
+.view-all-btn:hover {
+    background: var(--primary);
+    color: white;
+}
+
 /* Transaction History */
 .transaction-list {
     max-height: 500px;

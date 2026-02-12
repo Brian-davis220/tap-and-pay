@@ -9,6 +9,7 @@ const transactionHistory = document.getElementById('transaction-history');
 const cardVisual = document.getElementById('card-visual');
 const cardUidDisplay = document.getElementById('card-uid-display');
 const cardBalanceDisplay = document.getElementById('card-balance-display');
+const viewAllBtn = document.getElementById('view-all-btn');
 
 // System status elements
 const mqttStatus = document.getElementById('mqtt-status');
@@ -43,6 +44,12 @@ amountInput.addEventListener('input', (e) => {
   }
 });
 
+// View all transactions button
+viewAllBtn.addEventListener('click', () => {
+  loadAllTransactions();
+  viewAllBtn.style.display = 'none';
+});
+
 // Update uptime counter
 setInterval(() => {
   const elapsed = Date.now() - startTime;
@@ -59,8 +66,9 @@ socket.on('connect', () => {
   updateSystemStatus('mqtt', true);
   connectionIndicator.classList.add('connected');
   
-  // Load initial stats
+  // Load initial stats and all transactions
   loadStats();
+  loadAllTransactions();
 });
 
 socket.on('disconnect', () => {
@@ -109,6 +117,7 @@ socket.on('card-status', async (data) => {
 
       // Load transaction history
       await loadTransactionHistory(data.uid);
+      viewAllBtn.style.display = 'block'; // Show "View All" button
       updateSystemStatus('db', true);
     } else {
       // New card - allow entering holder name
@@ -137,7 +146,7 @@ socket.on('card-status', async (data) => {
       `;
 
       // Clear transaction history for new cards
-      transactionHistory.innerHTML = '<p style="text-align: center; color: #94a3b8; padding: 20px;">No transactions yet</p>';
+      transactionHistory.innerHTML = '<p style="text-align: center; color: #94a3b8; padding: 20px;">No transactions yet for this card</p>';
     }
   } catch (err) {
     console.error('Failed to fetch card data:', err);
@@ -309,7 +318,7 @@ async function loadStats() {
   }
 }
 
-// Load transaction history
+// Load transaction history for a specific card
 async function loadTransactionHistory(uid) {
   try {
     const response = await fetch(`${BACKEND_URL}/transactions/${uid}`);
@@ -320,43 +329,76 @@ async function loadTransactionHistory(uid) {
     const transactions = await response.json();
     
     if (transactions.length === 0) {
-      transactionHistory.innerHTML = '<p style="text-align: center; color: #94a3b8; padding: 20px;">No transactions yet</p>';
+      transactionHistory.innerHTML = '<p style="text-align: center; color: #94a3b8; padding: 20px;">No transactions yet for this card</p>';
       return;
     }
 
-    // Build transaction list HTML
-    let html = '<div class="transaction-items">';
-    transactions.forEach(tx => {
-      const date = new Date(tx.timestamp);
-      const dateStr = date.toLocaleDateString();
-      const timeStr = date.toLocaleTimeString();
-      const typeClass = tx.type === 'topup' ? 'topup' : 'debit';
-      const typeIcon = tx.type === 'topup' ? '↑' : '↓';
-      
-      html += `
-        <div class="transaction-item ${typeClass}">
-          <div class="transaction-icon">${typeIcon}</div>
-          <div class="transaction-details">
-            <div class="transaction-desc">${tx.description || tx.type}</div>
-            <div class="transaction-time">${dateStr} ${timeStr}</div>
-          </div>
-          <div class="transaction-amount">
-            <div class="amount-value ${tx.type === 'topup' ? 'positive' : 'negative'}">
-              ${tx.type === 'topup' ? '+' : '-'}$${tx.amount.toFixed(2)}
-            </div>
-            <div class="balance-after">Balance: $${tx.balanceAfter.toFixed(2)}</div>
-          </div>
-        </div>
-      `;
-    });
-    html += '</div>';
-    
-    transactionHistory.innerHTML = html;
+    displayTransactions(transactions, `Transactions for ${currentCardData?.holderName || uid}`);
   } catch (err) {
     console.error('Failed to load transaction history:', err);
     transactionHistory.innerHTML = '<p style="text-align: center; color: #ef4444; padding: 20px;">Failed to load transactions</p>';
   }
 }
 
-// Initial stats load
+// Load all transactions (default view)
+async function loadAllTransactions() {
+  try {
+    const response = await fetch(`${BACKEND_URL}/transactions?limit=50`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch transactions');
+    }
+
+    const transactions = await response.json();
+    
+    if (transactions.length === 0) {
+      transactionHistory.innerHTML = '<p style="text-align: center; color: #94a3b8; padding: 20px;">No transactions recorded yet</p>';
+      return;
+    }
+
+    displayTransactions(transactions, 'All Recent Transactions');
+  } catch (err) {
+    console.error('Failed to load all transactions:', err);
+    transactionHistory.innerHTML = '<p style="text-align: center; color: #ef4444; padding: 20px;">Failed to load transactions</p>';
+  }
+}
+
+// Display transactions with a title
+function displayTransactions(transactions, title) {
+  // Build transaction list HTML
+  let html = `<div style="margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
+    <h4 style="color: #94a3b8; font-size: 0.875rem; font-weight: 500;">${title}</h4>
+  </div>`;
+  
+  html += '<div class="transaction-items">';
+  
+  transactions.forEach(tx => {
+    const date = new Date(tx.timestamp);
+    const dateStr = date.toLocaleDateString();
+    const timeStr = date.toLocaleTimeString();
+    const typeClass = tx.type === 'topup' ? 'topup' : 'debit';
+    const typeIcon = tx.type === 'topup' ? '↑' : '↓';
+    
+    html += `
+      <div class="transaction-item ${typeClass}">
+        <div class="transaction-icon">${typeIcon}</div>
+        <div class="transaction-details">
+          <div class="transaction-desc">${tx.holderName || 'Unknown'} - ${tx.description || tx.type}</div>
+          <div class="transaction-time">${dateStr} ${timeStr}</div>
+        </div>
+        <div class="transaction-amount">
+          <div class="amount-value ${tx.type === 'topup' ? 'positive' : 'negative'}">
+            ${tx.type === 'topup' ? '+' : '-'}$${tx.amount.toFixed(2)}
+          </div>
+          <div class="balance-after">Balance: $${tx.balanceAfter.toFixed(2)}</div>
+        </div>
+      </div>
+    `;
+  });
+  html += '</div>';
+  
+  transactionHistory.innerHTML = html;
+}
+
+// Initial stats and transactions load
 loadStats();
+loadAllTransactions();
