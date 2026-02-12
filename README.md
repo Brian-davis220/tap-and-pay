@@ -4,15 +4,15 @@ Efficient bridging of RFID hardware with a web dashboard using MQTT and WebSocke
 
 ## Team Information
 
-- **Team ID**: `iot_shield_2026`
+- **Team ID**: `team_rdf`
 
 ## MQTT Topics
 
-- `rfid/iot_shield_2026/card/status`: ESP8266 publishes card UID and balance when detected.
-- `rfid/iot_shield_2026/card/topup`: Backend publishes top-up commands.
-- `rfid/iot_shield_2026/card/balance`: ESP8266 publishes confirmation of balance update.
-- `rfid/iot_shield_2026/device/status`: MQTT Last Will (online/offline).
-- `rfid/iot_shield_2026/device/health`: Periodic health metrics (IP, RSSI, Memory).
+- `rfid/team_rdf/card/status`: ESP8266 publishes card UID and balance when detected.
+- `rfid/team_rdf/card/topup`: Backend publishes top-up commands.
+- `rfid/team_rdf/card/balance`: ESP8266 publishes confirmation of balance update.
+- `rfid/team_rdf/device/status`: MQTT Last Will (online/offline).
+- `rfid/team_rdf/device/health`: Periodic health metrics (IP, RSSI, Memory).
 
 ## HTTP API Endpoints
 

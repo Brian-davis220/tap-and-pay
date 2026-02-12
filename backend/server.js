@@ -17,7 +17,7 @@ app.use(cors());
 app.use(express.json());
 
 const PORT = process.env.PORT || 5000;
-const TEAM_ID = "iot_shield_2026";
+const TEAM_ID = "team_rdf";
 const MQTT_BROKER = "mqtt://157.173.101.159:1883";
 
 // Topics
