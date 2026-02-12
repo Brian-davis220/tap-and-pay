@@ -2,12 +2,24 @@
 
 A complete RFID-based payment system with real-time card management, transaction tracking, and a modern dashboard interface.
 
-## 🤖 Live Demo
+---
 
-** Access the live application: ** [http://157.173.101.159:9208](http://157.173.101.159:9208)
+## 🌐 **LIVE DEMO**
 
-- Frontend: http://157.173.101.159:9208
-- Backend API: http://157.173.101.159:8208
+<div align="center">
+
+### 🚀 **[VIEW LIVE APPLICATION →](http://157.173.101.159:9208)**
+
+**Frontend:** http://157.173.101.159:9208  
+**Backend API:** http://157.173.101.159:8208
+
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Online-success?style=for-the-badge&logo=google-chrome&logoColor=white)](http://157.173.101.159:9208)
+[![Backend API](https://img.shields.io/badge/Backend%20API-Running-blue?style=for-the-badge&logo=fastapi&logoColor=white)](http://157.173.101.159:8208)
+[![Status](https://img.shields.io/badge/Status-Deployed-brightgreen?style=for-the-badge)](http://157.173.101.159:9208)
+
+</div>
+
+---
 
 ## 👁️ Features
 
