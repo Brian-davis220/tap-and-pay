@@ -2,7 +2,14 @@
 
 A complete RFID-based payment system with real-time card management, transaction tracking, and a modern dashboard interface.
 
-## 🌟 Features
+## � Live Demo
+
+**🚀 Access the live application:** [http://157.173.101.159:9208](http://157.173.101.159:9208)
+
+- Frontend: http://157.173.101.159:9208
+- Backend API: http://157.173.101.159:8208
+
+## �🌟 Features
 
 - Real-time RFID card detection via MQTT
 - Cumulative balance top-ups with persistent storage
@@ -16,6 +23,7 @@ A complete RFID-based payment system with real-time card management, transaction
 ## Team Information
 
 - **Team ID**: `team_rdf`
+- **Live Application**: http://157.173.101.159:9208
 - **VPS Server**: 157.173.101.159
 - **Backend Port**: 8208
 - **Frontend Port**: 9208
@@ -53,7 +61,11 @@ npm start
 - Frontend: http://localhost:9208
 - Backend: http://localhost:8208
 
-### VPS Deployment
+### VPS Deployment (Already Deployed! ✅)
+
+**Live URL**: http://157.173.101.159:9208
+
+The application is currently running on the VPS. To update or redeploy:
 
 1. **Upload to VPS:**
 ```bash
