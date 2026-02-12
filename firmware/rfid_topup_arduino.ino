@@ -6,14 +6,15 @@
 #include <time.h>
 
 // ----------------- WiFi Configuration -----------------
-const char* ssid = "RCA";
-const char* password = "@RcaNyabihu2023";
+
+const char* ssid = "your-wifi";
+const char* password = "your-password";
 const uint32_t WIFI_TIMEOUT_MS = 30000;
 
 // ----------------- MQTT Configuration -----------------
 const char* mqtt_server = "broker.benax.rw";
 const uint16_t MQTT_PORT = 1883;
-const char* team_id = "rdf";
+const char* team_id = "team_rdf";
 
 // ----------------- MQTT Topics -----------------
 String topic_status   = "rfid/" + String(team_id) + "/card/status";
@@ -91,7 +92,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
   float amount = doc["amount"];
 
   // Simulate old balance
-  float simulatedOldBalance = 50.0;
+  float simulatedOldBalance = 0;
   float newBalance = simulatedOldBalance + amount;
 
   // Prepare response
