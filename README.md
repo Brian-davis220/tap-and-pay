@@ -8,16 +8,16 @@ A complete RFID-based payment system with real-time card management, transaction
 
 <div align="center">
 
-# 🚀 **[VIEW LIVE APPLICATION →](http://157.173.101.159:9208)**
+# 🚀 **[VIEW LIVE APPLICATION →](http://157.173.101.159:9251)**
 
-## **Frontend:** http://157.173.101.159:9208  
-## **Backend API:** http://157.173.101.159:8208
+## **Frontend:** http://157.173.101.159:9251  
+## **Backend API:** http://157.173.101.159:8251
 
 <br>
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Online-success?style=for-the-badge&logo=google-chrome&logoColor=white&scale=2)](http://157.173.101.159:9208)
-[![Backend API](https://img.shields.io/badge/Backend%20API-Running-blue?style=for-the-badge&logo=fastapi&logoColor=white&scale=2)](http://157.173.101.159:8208)
-[![Status](https://img.shields.io/badge/Status-Deployed-brightgreen?style=for-the-badge&scale=2)](http://157.173.101.159:9208)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Online-success?style=for-the-badge&logo=google-chrome&logoColor=white&scale=2)](http://157.173.101.159:9251)
+[![Backend API](https://img.shields.io/badge/Backend%20API-Running-blue?style=for-the-badge&logo=fastapi&logoColor=white&scale=2)](http://157.173.101.159:8251)
+[![Status](https://img.shields.io/badge/Status-Deployed-brightgreen?style=for-the-badge&scale=2)](http://157.173.101.159:9251)
 
 <br>
 
@@ -39,10 +39,10 @@ A complete RFID-based payment system with real-time card management, transaction
 ## Team Information
 
 - **Team ID**: `team_rdf`
-- **Live Application**: http://157.173.101.159:9208
+- **Live Application**: http://157.173.101.159:9251
 - **VPS Server**: 157.173.101.159
-- **Backend Port**: 8208
-- **Frontend Port**: 9208
+- **Backend Port**: 8251
+- **Frontend Port**: 9251
 - **MQTT Broker**: 157.173.101.159:1883
 
 
@@ -60,8 +60,8 @@ npm start
 ```
 
 **Access locally:**
-- Frontend: http://localhost:9208
-- Backend: http://localhost:8208
+- Frontend: http://localhost:9251
+- Backend: http://localhost:8251
 
 ### VPS Deployment
 
@@ -79,8 +79,8 @@ chmod +x deploy.sh
 ```
 
 3. **Access online:**
-- Frontend: http://157.173.101.159:9208
-- Backend: http://157.173.101.159:8208
+- Frontend: http://157.173.101.159:9251
+- Backend: http://157.173.101.159:8251
 
 
 ## 📡 MQTT Topics
@@ -181,13 +181,13 @@ chmod +x deploy.sh
 ### Backend (.env)
 ```env
 MONGODB_URI=your_mongodb_connection_string
-PORT=8208
+PORT=8251
 ```
 
 ### Auto-Configuration
 The frontend automatically detects the environment:
-- **Local**: Uses `localhost:8208`
-- **Production**: Uses `157.173.101.159:8208`
+- **Local**: Uses `localhost:8251`
+- **Production**: Uses `157.173.101.159:8251`
 
 No manual configuration needed!
 
@@ -214,13 +214,13 @@ pm2 monit                          # Monitor resources
 
 ### Backend Issues
 - Check MongoDB connection in `.env`
-- Verify port 8208 is available: `lsof -i :8208`
+- Verify port 8251 is available: `lsof -i :8251`
 - Check logs: `pm2 logs tap-to-pay-backend`
 
 ### Frontend Issues
 - Verify backend is running
 - Check browser console for errors
-- Test backend: `curl http://localhost:8208/cards`
+- Test backend: `curl http://localhost:8251/cards`
 
 ### MQTT Issues
 - Verify MQTT broker is running on port 1883
@@ -255,7 +255,7 @@ tap-to-pay/
 - MongoDB credentials stored in `.env` (gitignored)
 - CORS enabled for development
 - Use HTTPS in production (add reverse proxy like Nginx)
-- Firewall configured for ports 9208, 8208, 1883
+- Firewall configured for ports 9251, 8251, 1883
 
 ## 📄 License
 
